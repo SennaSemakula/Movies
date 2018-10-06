@@ -1,0 +1,25 @@
+#!/bin/bash
+#set -e
+
+TAG_NAME=$2
+function build_container {
+	echo "TAGNAME IS $TAG_NAME"
+	echo "Starting to build docker container $TAG_NAME"
+	docker build -t $TAG_NAME -f "build-system/Dockerfile" . 
+}
+
+function run_container {
+	echo "Running container $TAG_NAME"
+	docker start $TAG_NAME
+}
+
+
+function main {
+	if [[ $1 == "build" ]]; then
+		build_container $TAG_NAME
+	else
+		echo "Please specify build or run params"
+	fi
+}
+
+main $1 $2
