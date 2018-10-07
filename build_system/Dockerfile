@@ -11,7 +11,8 @@ WORKDIR /tmp
 RUN pip install -r requirements.txt
 RUN pip install imdbpy 
 RUN pip install bokeh 
-RUN pip install plotly
+RUN pip install plotly 
+
 
 ENTRYPOINT ["python"]
 CMD ["app.py"]
