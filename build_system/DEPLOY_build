@@ -5,7 +5,7 @@ TAG_NAME=$2
 function build_container {
 	echo "TAGNAME IS $TAG_NAME"
 	echo "Starting to build docker container $TAG_NAME"
-	docker build -t $TAG_NAME -f "build-system/Dockerfile" . 
+	docker build -t $TAG_NAME -f "build_system/Dockerfile" . 
 }
 
 function run_container {
