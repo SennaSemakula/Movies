@@ -3,20 +3,21 @@
 
 TAG_NAME=$2
 function build_container {
-	echo "TAGNAME IS $TAG_NAME"
 	echo "Starting to build docker container $TAG_NAME"
-	docker build -t $TAG_NAME -f "build_system/Dockerfile" . 
+	docker build -t "$TAG_NAME" -f "build_system/Dockerfile" . 
 }
 
 function run_container {
-	echo "Running container $TAG_NAME"
-	docker start $TAG_NAME
+	echo "Running container $TAG_NAME on port 5000"
+	docker run -d -p 5000:5000 $TAG_NAME
 }
 
 
 function main {
 	if [[ $1 == "build" ]]; then
 		build_container $TAG_NAME
+	elif [[ $1 == "run" ]]; then
+		run_container $TAG_NAME
 	else
 		echo "Please specify build or run params"
 	fi
