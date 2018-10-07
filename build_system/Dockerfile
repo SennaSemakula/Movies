@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER Senna Semakula-Buuza "senna.semakula@outlook.com"
+MAINTAINER Senna Semakula-Buuza "senna.semakula@gmail.com"
 
 #Update the image to retrieve the latest packages
 RUN apt-get update && apt-get upgrade -y 
