@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from pprint import pprint
 from plot import Plot
 from bubble import Bubble
@@ -34,10 +34,10 @@ def bubble_visualisation():
 
     bb_chart = Bubble(data, "Bubble Visusalisation 1")
     bb_data = bb_chart.draw_graph(data['x_data'], data['y_data'], data['circle_data'])
-    
-    file = bb_chart.generate_file(chart_data=bb_data, filename="Bubble_viz_1", open_chart=True)
 
-    return file
+    file_name = "Bubble_viz_1.html"
+    bb_chart.generate_file(chart_data=bb_data, filename=file_name, open_chart=False)
+    return render_template(file_name)
 
 """Main entry point for application"""
 def main():
