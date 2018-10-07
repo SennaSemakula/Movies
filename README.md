@@ -1,7 +1,7 @@
 # Movies
-Python web application to retrieve movie ratings. Utilises IDMB API and Vue/Odean
+Python web application to retrieve movie ratings. It utilizes IMDB API and Vue/Odean
 
-The following are steps of how to succesfully run the application. Please note that Docker is a pre-requit. Ensure you have docker installed on your machine.
+The following are steps of how to succesfully run the application. Please note that Docker is a prerequisite. Ensure you have Docker installed on your machine.
 
 Deployment
 1. CD into Movies directory
