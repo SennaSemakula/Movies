@@ -1,12 +1,10 @@
 import doctest
 import os
+from . import graph
 import plotly.graph_objs as go
 import plotly
-from graph import Graph
 
-
-
-class Bubble(Graph):
+class Bubble(graph.Graph):
     PATH = "os.getcwd()".format("/templates/test_graph.html")
     """Advanced bubble chart implementation 
     

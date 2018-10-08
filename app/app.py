@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from pprint import pprint
-from plot import Plot
-from bubble import Bubble
+import graph
+from charts import bubble, plot
 
 """Main application file"""
 app = Flask(__name__)
@@ -18,7 +18,7 @@ def movie_visualisation():
         "data_2": [4, 50, 60, 12] 
     }
 
-    graph1 = Plot(data, "Senna Viz")
+    graph1 = plot.Plot(data, "Senna Viz")
     final_graph = graph1.draw_graph(data['data_1'], data['data_2'])
 
     return final_graph
@@ -32,7 +32,7 @@ def bubble_visualisation():
         "circle_data": [40, 60, 80, 100]
     }
 
-    bb_chart = Bubble(data, "Bubble Visusalisation 1")
+    bb_chart = bubble.Bubble(data, "Bubble Visusalisation 1")
     bb_data = bb_chart.draw_graph(data['x_data'], data['y_data'], data['circle_data'])
 
     file_name = "Bubble_viz_1.html"
