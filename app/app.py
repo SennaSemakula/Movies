@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from pprint import pprint
-import graph
+from charts import graph
 from charts import bubble, plot
 
 """Main application file"""
@@ -24,15 +24,15 @@ def movie_visualisation():
     return final_graph
 
 """Displays a bubble chart visualiastion"""
-@app.route('/viz/bubble')
-def bubble_visualisation():
+@app.route('/viz/bubble/<title>')
+def bubble_visualisation(title):
     data = {
         "x_data": [1, 2, 3, 4],
         "y_data": [10, 11, 12, 13],
         "circle_data": [40, 60, 80, 100]
     }
 
-    bb_chart = bubble.Bubble(data, "Bubble Visusalisation 1")
+    bb_chart = bubble.Bubble(data, title)
     bb_data = bb_chart.draw_graph(data['x_data'], data['y_data'], data['circle_data'])
 
     file_name = "Bubble_viz_1.html"

@@ -1,20 +1,17 @@
+from . import graph
 import doctest
 import os
-from . import graph
 import plotly.graph_objs as go
 import plotly
 
 class Bubble(graph.Graph):
-    PATH = "os.getcwd()".format("/templates/test_graph.html")
-    """Advanced bubble chart implementation 
+    """Advanced bubble graph implementation 
     
-    >>> data = {'x': [1, 2, 3], 'y': [2, 4, 8]}
-    >>> bc = Bubble(data, "Doctest Chart")
-    >>> chart_data = bc.draw_graph(data['x'], data['y'], [2, 4, 5])
-    >>> chart_html = bc.generate_file(chart_data, 'test_graph.html')
-    >>> hello = print(os.getcwd())
-    >>> print(chart_html)
-    Bubble.PATH
+    >>> chart = Bubble([0, 1], 'Testing graph object')
+    >>> chart.draw_graph([0, 2], [1, 4], [5, 8])
+    [Scatter({
+        'marker': {'size': [5, 8]}, 'mode': 'markers', 'x': [0, 2], 'y': [1, 4]
+    })]
     """
     def __init__(self, data, title):
         self.data = data
@@ -30,7 +27,10 @@ class Bubble(graph.Graph):
         return data
 
     def generate_file(self, chart_data, filename, open_chart=False):
-        """Generate html file that includes chart"""
+        """Generate html file that includes chart
+        >>> bc.generate_file(chart_data, 'test_graph.html')
+        'file:///home/dinopc/Business_Projects/Movies/app/charts/templates/test_graph.html'
+        """
         graph_html = plotly.offline.plot({
                             "data": chart_data,
                             "layout": go.Layout(title=self.title)},
@@ -39,4 +39,10 @@ class Bubble(graph.Graph):
 
         return graph_html
 
-doctest.testmod()
+
+#Doctests
+test_data = {'x': [1, 2, 3], 'y': [2, 4, 8]}
+doctest.testmod(extraglobs={
+        'bc': Bubble(test_data, "Doctest Chart"),
+        'path': "hello",
+        'chart_data': Bubble(test_data, 'hello').draw_graph(test_data['x'], test_data['y'], [1, 2, 3]),})

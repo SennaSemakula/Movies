@@ -1,10 +1,12 @@
 from . import graph
+import doctest
+import os
 from bokeh.plotting import figure, output_file, show
 from bokeh.resources import CDN
 from bokeh.embed import file_html
 
-"""Class that will generate a simple plot chart"""
 class Plot(graph.Graph):
+	"""Advanced scatter plot graph implementation """
 	def __init__(self, data, title):
 		self.data = data
 		self.title = title
@@ -18,5 +20,6 @@ class Plot(graph.Graph):
 
 	def generate_file(self, plot, cdn_import, title):
 		return file_html(plot, cdn_import, title)
+
 
 
