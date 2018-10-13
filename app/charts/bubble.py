@@ -29,20 +29,28 @@ class Bubble(graph.Graph):
     def generate_file(self, chart_data, filename, open_chart=False):
         """Generate html file that includes chart
         >>> bc.generate_file(chart_data, 'test_graph.html')
-        'file:///home/dinopc/Business_Projects/Movies/app/charts/templates/test_graph.html'
+        path
         """
-        graph_html = plotly.offline.plot({
-                            "data": chart_data,
-                            "layout": go.Layout(title=self.title)},
-                            filename="templates/{}".format(filename),
-                            auto_open=open_chart)
+        PATH = "{}/templates".format(os.getcwd())
+
+        if os.path.isdir(PATH) is False:
+            os.mkdir(PATH)
+
+        try:
+            graph_html = plotly.offline.plot({
+                                "data": chart_data,
+                                "layout": go.Layout(title=self.title)},
+                                filename="templates/{}".format(filename),
+                                auto_open=open_chart)
+        except FileNotFoundError as fe:
+            print("Could not find the file".format(fe))
 
         return graph_html
-
 
 #Doctests
 test_data = {'x': [1, 2, 3], 'y': [2, 4, 8]}
 doctest.testmod(extraglobs={
+        'path': "{}/templates".format(os.getcwd()),
         'bc': Bubble(test_data, "Doctest Chart"),
         'path': "hello",
         'chart_data': Bubble(test_data, 'hello').draw_graph(test_data['x'], test_data['y'], [1, 2, 3]),})
