@@ -1,25 +1,43 @@
 from . import graph
 import doctest
 import os
-from bokeh.plotting import figure, output_file, show
-from bokeh.resources import CDN
-from bokeh.embed import file_html
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 class Plot(graph.Graph):
-	"""Advanced scatter plot graph implementation """
-	def __init__(self, data, title):
-		self.data = data
-		self.title = title
+    """Advanced scatter plot graph implementation """
+    def __init__(self, data, title):
+        self.data = data
+        self.title = title
 
-	def draw_graph(self, x_axis, y_axis):
-		graph = figure(title=self.title, x_axis_label='x', y_axis_label='y')
-		graph.line(x_axis, y_axis, legend="Temp.", line_width=2)
-		show(graph)
+    def draw_graph(self, x_axis, y_axis):
+        graph_data = go.Scatter(
+            x = x_axis, 
+            y = y_axis,
+            mode = 'markers',
+            marker = dict(
+                size = 20,
+                color = 'rgba(152, 0, 0, .8)',
+                line = dict(
+                    width = 2.5,
+                    color = 'rgb(0, 0, 0, 0)')))
 
-		return self.generate_file(graph, CDN, "Movies")
+        return [graph_data]
 
-	def generate_file(self, plot, cdn_import, title):
-		return file_html(plot, cdn_import, title)
+    def generate_file(self, chart_data, filename, open_chart=False):
+        PATH = "{}/templates".format(os.getcwd())
+
+        if os.path.isdir(PATH) is False:
+            os.mkdir(PATH)
+
+        graph_html = plotly.offline.plot({
+                                "data": chart_data,
+                                "layout": go.Layout(title=self.title)},
+                                filename="templates/{}".format(filename),
+                                auto_open=open_chart)
+
+        return graph_html
 
 
 

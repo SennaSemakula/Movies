@@ -11,17 +11,20 @@ def movie_index():
     return "Welcome to Movie ratings"
 
 """When routed, will display visualisation"""
-@app.route('/viz/plot')
-def movie_visualisation():
+@app.route('/viz/plot/<title>')
+def movie_visualisation(title):
     data = {
-        "data_1": [1, 2, 3, 4, 5],
-        "data_2": [4, 50, 60, 12] 
+        "x_data": (4, 21, 5, 53),
+        "y_data": (10, 11, 12, 13),
     }
 
-    graph1 = plot.Plot(data, "Senna Viz")
-    final_graph = graph1.draw_graph(data['data_1'], data['data_2'])
+    sc_chart = plot.Plot(data, title)
+    sc_data = sc_chart.draw_graph(data['x_data'], data['y_data'])
 
-    return final_graph
+    file_name = "Scatter_1.html"
+    sc_chart.generate_file(chart_data=sc_data   , filename=file_name, open_chart=False)
+
+    return render_template(file_name)
 
 """Displays a bubble chart visualiastion"""
 @app.route('/viz/bubble/<title>')
