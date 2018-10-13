@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Savings</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../static/styles.css">
+</head>
+<body >
+<!--Navbar-->
+<nav class="navbar navbar-light light-blue lighten-4">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"
+        aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i class="fa fa-bars fa-1x"></i></span></button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+        </ul>
+        <!-- Links -->
+
+    </div>
+    <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+	<h1 class="container">Select chart to display projected growth</h1>
+
+<table class="container">
+	<tr>
+		<td>
+			<strong><p>Bubble Chart</p></strong>
+			<img src="../static/bubble-chart-template.png", width=300, height=300>
+		</td>
+		<td>
+			<strong><p>Scatter plot</p></strong>
+			<img src="../static/scatter-plot.png", width=300, height=300>
+		</td>
+		<td>
+			<strong><p>Bar Chart</p></strong>
+			<img src="../static/bar-chart.png", width=300, height=300>
+		</td>
+	</tr>
+</table>
+
+<div class="container">
+	<h2>Savings Break down</h2>
+	<table border = 1>
+		{% for item, value in result.items() %}
+		{% if item != 'submit' and item != 'title'%}
+		<tr>
+			{% if item == 'monthly' %}
+			<th>Monthly savings (£):</th>
+			{% else %}
+			<th>Yearly savings (£): {{ item }}</th>
+			{% endif %}
+			
+			<td>{{ value }}</td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+
+	<div>
+		<strong><p>Total: £{{ total }}</p></strong>
+	</div>
+
+</div>
+	
+</body>
+</html>
