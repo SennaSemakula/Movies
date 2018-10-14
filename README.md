@@ -1,5 +1,5 @@
-# Movies
-Python web application to that visualises statistics on movie ratings. It utilizes IMDB API and Vue/Odeon, as well as several Py visualisation libraries. 
+# Savings Visualiser
+Python web application to that allows calculates statistics on savings, generating vast visualisations. It utilises visualisation libraries such as plotly.
 
 The following are steps of how to succesfully run the application. Please note that Docker is a prerequisite. Ensure you have Docker installed on your machine.
 
