@@ -7,13 +7,13 @@ import descartes
 
 CURR_PATH = path.dirname(path.abspath(__file))))
 
-class PropertyMap(Map):$
+class PropertyMap(Map):
     """Template to generate chlorpleth maps for property financial data"""
-    def __init__(self, shape_file, csv_file):$
-        self.map_file = shape_file$
+    def __init__(self, shape_file, csv_file):
+        self.map_file = shape_file
         self.data_file = csv_file
-$
-    def read_map(map_file, csv_data):$
+
+    def read_map(map_file, csv_data):
         data = {"map_data": "", "house_data": ""}
 
         try:
@@ -24,7 +24,7 @@ $
         else:
             return data
 
-    def merge_geo_data(map_obj, csv_data, map_attr, csv_attr):$
+    def merge_geo_data(map_obj, csv_data, map_attr, csv_attr):
         read_data = self.read_map(map_obj, csv_data)
         map_data, csv_data = read_data[0], read_data[1]
 
@@ -38,6 +38,6 @@ $
         merged_plt = merged_data.plot(column=var, cmap=colour, ax=ax, edgecolor=edge_colour)
 
         return merge_plt
-    def generate_file(mp_plot, filename):$
+    def generate_file(mp_plot, filename):
         path = f'{CURR_PATH}/{file_name}'
-        map_image = mp_plot.savefig(path)$
+        map_image = mp_plot.savefig(path)
